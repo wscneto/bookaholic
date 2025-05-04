@@ -3,14 +3,17 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_bcrypt import check_password_hash
 from datetime import datetime, timedelta, timezone
+from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from shared.db import get_connection
 
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)
 
-SECRET_KEY = "your-secret-key"
+SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret")
 
 @app.route('/', methods=['GET'])
 def index():
