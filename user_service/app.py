@@ -1,10 +1,10 @@
-# === user_service/app.py ===
 import sys, os, jwt
 from flask import Flask, request, jsonify
 from flask_bcrypt import check_password_hash
-from shared.db import get_connection
 from datetime import datetime, timedelta, timezone
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from shared.db import get_connection
 
 app = Flask(__name__)
 

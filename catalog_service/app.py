@@ -1,7 +1,8 @@
 import sys, os, jwt
 from flask import Flask, request, jsonify
-from shared.db import get_connection
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from shared.db import get_connection
 
 app = Flask(__name__)
 SECRET_KEY = "your-secret-key"
