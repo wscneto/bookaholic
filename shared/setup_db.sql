@@ -66,3 +66,12 @@ CREATE TABLE IF NOT EXISTS recommendations (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
+
+-- Adding some sample books to the 'books' table
+INSERT INTO books (title, author, description, price, stock) VALUES
+('The Pragmatic Programmer', 'Andrew Hunt and David Thomas', 'Classic book on software engineering practices.', 39.99, 10),
+('Clean Code', 'Robert C. Martin', 'A handbook of agile software craftsmanship.', 34.50, 8),
+('Introduction to Algorithms', 'Cormen, Leiserson, Rivest, and Stein', 'Comprehensive textbook on algorithms.', 89.00, 5),
+('Fluent Python', 'Luciano Ramalho', 'Clear, practical guide to Python’s most powerful features.', 45.00, 6),
+('Deep Learning', 'Ian Goodfellow, Yoshua Bengio, Aaron Courville', 'Fundamentals of deep learning techniques.', 72.00, 4),
+('Dom Casmurro', 'Machado de Assis', 'Dom Casmurro conta a história de Bento Santiago (Bentinho), que se apaixona por Capitu na adolescência, desafiando a vontade da mãe, Dona Glória, que queria que ele fosse padre. O romance explora o relacionamento turbulento do casal, marcado por ciúmes e suspeitas de traição, culminando numa separação e na partida de Capitu e do filho, Ezequiel, para a Europa.', 39.99, 20);
