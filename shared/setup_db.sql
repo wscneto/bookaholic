@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS books (
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
     stock INT DEFAULT 0,
+    cover_url VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -68,10 +69,10 @@ CREATE TABLE IF NOT EXISTS recommendations (
 );
 
 -- Adding some sample books to the 'books' table
-INSERT INTO books (title, author, description, price, stock) VALUES
-('The Pragmatic Programmer', 'Andrew Hunt and David Thomas', 'Classic book on software engineering practices.', 39.99, 10),
-('Clean Code', 'Robert C. Martin', 'A handbook of agile software craftsmanship.', 34.50, 8),
-('Introduction to Algorithms', 'Cormen, Leiserson, Rivest, and Stein', 'Comprehensive textbook on algorithms.', 89.00, 5),
-('Fluent Python', 'Luciano Ramalho', 'Clear, practical guide to Python’s most powerful features.', 45.00, 6),
-('Deep Learning', 'Ian Goodfellow, Yoshua Bengio, Aaron Courville', 'Fundamentals of deep learning techniques.', 72.00, 4),
-('Dom Casmurro', 'Machado de Assis', 'Dom Casmurro conta a história de Bento Santiago (Bentinho), que se apaixona por Capitu na adolescência, desafiando a vontade da mãe, Dona Glória, que queria que ele fosse padre. O romance explora o relacionamento turbulento do casal, marcado por ciúmes e suspeitas de traição, culminando numa separação e na partida de Capitu e do filho, Ezequiel, para a Europa.', 39.99, 20);
+INSERT INTO books (title, author, description, price, stock, cover_url) VALUES
+('The Pragmatic Programmer', 'Andrew Hunt and David Thomas', 'Classic book on software engineering practices.', 39.99, 10, 'https://m.media-amazon.com/images/I/510NRcB7AAL._SY445_SX342_.jpg'),
+('Clean Code', 'Robert C. Martin', 'A handbook of agile software craftsmanship.', 34.50, 8, 'https://m.media-amazon.com/images/I/41bOkXnNBjL._SY445_SX342_.jpg'),
+('Introduction to Algorithms', 'Cormen, Leiserson, Rivest, and Stein', 'Comprehensive textbook on algorithms.', 89.00, 5, 'https://m.media-amazon.com/images/I/61Mw06x2XcL._SY425_.jpg'),
+('Fluent Python', 'Luciano Ramalho', 'Clear, practical guide to Python’s most powerful features.', 45.00, 6, 'https://m.media-amazon.com/images/I/411qhFCwczL._SY445_SX342_.jpg'),
+('Deep Learning', 'Ian Goodfellow, Yoshua Bengio, Aaron Courville', 'Fundamentals of deep learning techniques.', 72.00, 4, 'https://m.media-amazon.com/images/I/A10G+oKN3LL._SY522_.jpg'),
+('Dom Casmurro', 'Machado de Assis', 'Dom Casmurro conta a história de Bento Santiago (Bentinho), que se apaixona por Capitu na adolescência, desafiando a vontade da mãe, Dona Glória, que queria que ele fosse padre. O romance explora o relacionamento turbulento do casal, marcado por ciúmes e suspeitas de traição, culminando numa separação e na partida de Capitu e do filho, Ezequiel, para a Europa.', 39.99, 20, 'https://m.media-amazon.com/images/I/61Sl2sWG7xS._SY522_.jpg');
