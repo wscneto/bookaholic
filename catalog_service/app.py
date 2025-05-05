@@ -1,14 +1,17 @@
 import sys, os, jwt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from shared.db import get_connection
 
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)
 
-SECRET_KEY = "your-secret-key"
+SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret")
 
 @app.route('/', methods=['GET'])
 def index():
@@ -19,6 +22,14 @@ def get_books():
     db = get_connection()
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT * FROM books")
+    return jsonify(cursor.fetchall())
+
+@app.route('/books/search', methods=['GET'])
+def search_books():
+    query = request.args.get('q', '')
+    db = get_connection()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM books WHERE title LIKE %s", (f"%{query}%",))
     return jsonify(cursor.fetchall())
 
 @app.route('/books', methods=['POST'])
@@ -41,7 +52,7 @@ def add_book():
     data = request.json
     db = get_connection()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO books (title, author, description, price, stock) VALUES (%s, %s, %s, %s, %s)", (data['title'], data['author'], data['description'], data['price'], data['stock']))
+    cursor.execute("INSERT INTO books (title, author, description, price, stock, cover_url) VALUES (%s, %s, %s, %s, %s, %s)", (data['title'], data['author'], data['description'], data['price'], data['stock'], data['cover_url']))
     db.commit()
     return jsonify({"message": "Book added"}), 201
 
