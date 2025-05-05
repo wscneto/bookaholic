@@ -6,4 +6,13 @@
             Welcome to Bookaholic
         </h1>
     </div>
+
+    <h2 class="text-3xl font-bold text-primary mb-8 text-center">
+        See our collection:
+    </h2>
+    <BooksCarousel />
 </template>
+
+<script lang="ts" setup>
+    import BooksCarousel from "../components/BooksCarousel.vue";
+</script>
