@@ -1,2 +1,3 @@
-# bookaholic
-Online book store with microservices.
+# Bookaholic
+
+Welcome to Bookaholic, an online book store with microservices.
