@@ -95,14 +95,14 @@
                 });
                 localStorage.setItem("token", res.data.token);
                 alert("Login successful!");
-                // redirect to homepage or dashboard
-                router.push("/");
+                await router.push("/");
+                window.location.reload();
             } else {
-                const password_hash = form.password; // let backend hash it
+                //const password_hash = form.password; // let backend hash it
                 await axios.post("http://localhost:5001/users", {
                     name: form.name,
                     email: form.email,
-                    password_hash,
+                    password: form.password,
                 });
                 alert("Registration successful! You can now login.");
                 router.push({ name: "auth", query: { login: "true" } });
