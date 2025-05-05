@@ -24,6 +24,16 @@ def get_books():
     cursor.execute("SELECT * FROM books")
     return jsonify(cursor.fetchall())
 
+@app.route('/books/<int:id>', methods=['GET'])
+def get_book(id):
+    db = get_connection()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM books WHERE id = %s", (id,))
+    result = cursor.fetchone()
+    if not result:
+        return jsonify({'error': 'Book not found'}), 404
+    return jsonify(result)
+
 @app.route('/books/search', methods=['GET'])
 def search_books():
     query = request.args.get('q', '')
