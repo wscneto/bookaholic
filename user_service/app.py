@@ -2,6 +2,7 @@ import sys, os, jwt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_bcrypt import check_password_hash
+from flask_bcrypt import generate_password_hash
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 
@@ -24,7 +25,8 @@ def create_user():
     data = request.json
     db = get_connection()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO users (name, email, password_hash, is_admin) VALUES (%s, %s, %s, %s)", (data['name'], data['email'], data['password_hash'], data.get('is_admin', False)))
+    hashed_pw = generate_password_hash(data['password']).decode('utf-8')
+    cursor.execute("INSERT INTO users (name, email, password_hash, is_admin) VALUES (%s, %s, %s, %s)", (data['name'], data['email'], hashed_pw, data.get('is_admin', False)))
     db.commit()
     return jsonify({"message": "User created"}), 201
 
