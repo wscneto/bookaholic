@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useCartStore } from "./useCartStore";
 
 export const useAuthStore = defineStore("auth", {
     state: () => ({
@@ -9,10 +10,12 @@ export const useAuthStore = defineStore("auth", {
     },
     actions: {
         login(token: string) {
+            useCartStore().clearCart();
             this.token = token;
             localStorage.setItem("token", token);
         },
         logout() {
+            useCartStore().clearCart();
             this.token = null;
             localStorage.removeItem("token");
         },
