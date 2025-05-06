@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
 
 @theme {
     --color-primary: rgb(231 71 60);
