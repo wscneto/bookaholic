@@ -11,19 +11,19 @@
         <div class="flex items-center gap-4">
             <form
                 @submit.prevent="onSearch"
-                class="flex items-center gap-3"
+                class="flex items-center"
             >
                 <input
                     v-model="searchTerm"
                     type="text"
                     placeholder="Search books"
-                    class="px-5 py-2 rounded border"
+                    class="px-5 py-2 rounded-l border"
                 />
                 <button
                     type="submit"
-                    class="cursor-pointer bg-primary border-1 border-primary text-white px-5 py-2 rounded hover:opacity-90 font-semibold"
+                    class="cursor-pointer bg-primary border-1 border-primary text-white px-5 py-2 rounded-r hover:opacity-90 font-semibold"
                 >
-                    Search
+                    <span class="pi pi-search"></span>
                 </button>
             </form>
             <div
@@ -41,7 +41,14 @@
                     >Register</router-link
                 >
             </div>
-            <div v-else>
+            <div
+                v-else
+                class="flex items-center gap-4"
+            >
+                <router-link
+                    to="/cart"
+                    class="pi pi-shopping-cart cursor-pointer bg-white border-1 border-primary text-primary p-4 rounded-full hover:bg-primary hover:text-white transition"
+                ></router-link>
                 <button
                     @click="auth.logout()"
                     class="cursor-pointer bg-white border-1 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:opacity-90 hover:bg-primary hover:text-white transition"
