@@ -1,8 +1,7 @@
 import sys, os, jwt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from flask_bcrypt import check_password_hash
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import check_password_hash, generate_password_hash
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 
