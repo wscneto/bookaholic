@@ -49,12 +49,14 @@
                     to="/cart"
                     class="pi pi-shopping-cart cursor-pointer bg-white border-1 border-primary text-primary p-4 rounded-full hover:bg-primary hover:text-white transition"
                 ></router-link>
-                <button
-                    @click="auth.logout()"
-                    class="cursor-pointer bg-white border-1 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:opacity-90 hover:bg-primary hover:text-white transition"
-                >
-                    Logout
-                </button>
+                <router-link to="/">
+                    <button
+                        @click="auth.logout()"
+                        class="cursor-pointer bg-white border-1 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:opacity-90 hover:bg-primary hover:text-white transition"
+                    >
+                        Logout
+                    </button>
+                </router-link>
             </div>
         </div>
     </nav>
