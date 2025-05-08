@@ -1,6 +1,6 @@
 <template>
     <div class="p-4 max-w-3xl mx-auto min-h-screen">
-        <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+        <h2 class="text-2xl font-bold mb-4 text-primary">Your Cart:</h2>
         <div v-if="cart.items.length === 0">Cart is empty.</div>
         <div v-else>
             <div

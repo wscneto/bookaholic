@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mt-10 flex flex-row justify-center gap-10"
+        class="min-h-screen mt-10 flex flex-row justify-center gap-10"
         v-if="book"
     >
         <div class="p-4 max-w-4xl">
