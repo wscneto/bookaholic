@@ -5,7 +5,7 @@
         :numScroll="1"
         :responsiveOptions="responsiveOptions"
         circular
-        :autoplayInterval="3000"
+        :autoplayInterval="2500"
     >
         <template #item="slotProps">
             <router-link :to="`/books/${slotProps.data.id}`">
