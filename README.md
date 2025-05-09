@@ -60,7 +60,9 @@ Neste novo terminal, execute:
 
 ```bash
 cd bookaholic-frontend/
+npm install
+```
+```bash
 npm run dev
 ```
-
 O programa deve rodar em http://localhost:5173/
