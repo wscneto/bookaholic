@@ -3,8 +3,10 @@ import Home from "../views/Home.vue";
 import AuthPage from "../views/AuthPage.vue";
 import SearchResults from "../views/SearchResults.vue";
 import BookDetails from "../views/BookDetails.vue";
-import Cart from "../views/Cart.vue";
-import Wishlist from "../views/Wishlist.vue";
+import Cart from "@/views/Cart.vue";
+import Wishlist from "@/views/Wishlist.vue";
+import Orders from "@/views/Orders.vue";
+import Recommendations from "@/views/Recommendations.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,16 @@ const router = createRouter({
             path: "/wishlist",
             name: "wishlist",
             component: Wishlist,
+        },
+        {
+            path: "/orders",
+            name: "orders",
+            component: Orders,
+        },
+        {
+            path: "/recommendations",
+            name: "recommendations",
+            component: Recommendations,
         },
     ],
 });
