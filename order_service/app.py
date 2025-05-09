@@ -35,5 +35,29 @@ def get_order(order_id):
     order['items'] = cursor.fetchall()
     return jsonify(order)
 
+@app.route('/orders/user/<int:user_id>', methods=['GET'])
+def get_orders_by_user(user_id):
+    db = get_connection()
+    cursor = db.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM orders WHERE user_id = %s", (user_id,))
+    orders = cursor.fetchall()
+
+    for order in orders:
+        cursor.execute("""
+            SELECT 
+                oi.book_id, 
+                oi.quantity, 
+                oi.price, 
+                b.title, 
+                b.cover_url 
+            FROM order_items oi
+            JOIN books b ON oi.book_id = b.id
+            WHERE oi.order_id = %s
+        """, (order['id'],))
+        order['items'] = cursor.fetchall()
+
+    return jsonify(orders)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5003)
