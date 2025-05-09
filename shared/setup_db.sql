@@ -68,6 +68,16 @@ CREATE TABLE IF NOT EXISTS recommendations (
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
+-- Wishlist table
+CREATE TABLE wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    book_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES books(id),
+    UNIQUE (user_id, book_id)
+);
+
 -- Adding some sample books to the 'books' table
 INSERT INTO books (title, author, description, price, stock, cover_url) VALUES
 ('The Pragmatic Programmer', 'Andrew Hunt and David Thomas', 'Classic book on software engineering practices.', 39.99, 10, 'https://m.media-amazon.com/images/I/510NRcB7AAL._SY445_SX342_.jpg'),
