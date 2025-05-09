@@ -11,7 +11,7 @@ from shared.db import get_connection
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret")
 
@@ -55,6 +55,74 @@ def login():
     }, SECRET_KEY, algorithm='HS256')
 
     return jsonify({'token': token})
+
+@app.route('/wishlist', methods=['POST', 'OPTIONS'])
+def add_to_wishlist():
+    if request.method == 'OPTIONS':
+        return '', 200
+
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith('Bearer '):
+        return jsonify({'error': 'Authorization token required'}), 401
+
+    token = auth_header.split(' ')[1]
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+    except jwt.ExpiredSignatureError:
+        return jsonify({'error': 'Token expired'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'error': 'Invalid token'}), 401
+
+    user_id = payload['user_id']
+
+    data = request.get_json()
+    if not data or 'book_id' not in data:
+        return jsonify({'error': 'Missing book_id in request'}), 400
+
+    book_id = data['book_id']
+
+    db = get_connection()
+    cursor = db.cursor()
+    try:
+        cursor.execute("INSERT INTO wishlist (user_id, book_id) VALUES (%s, %s)", (user_id, book_id))
+        db.commit()
+        return jsonify({'message': 'Book added to wishlist'}), 201
+    except:
+        return jsonify({'error': 'Book already in wishlist or other error'}), 400
+
+
+@app.route('/wishlist', methods=['GET'])
+def get_wishlist():
+    token = request.headers.get('Authorization', '').split(' ')[-1]
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        user_id = payload['user_id']
+    except:
+        return jsonify({'error': 'Invalid or missing token'}), 401
+
+    db = get_connection()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT b.* FROM books b
+        JOIN wishlist w ON b.id = w.book_id
+        WHERE w.user_id = %s
+    """, (user_id,))
+    return jsonify(cursor.fetchall())
+
+@app.route('/wishlist/<int:book_id>', methods=['DELETE'])
+def remove_from_wishlist(book_id):
+    token = request.headers.get('Authorization', '').split(' ')[-1]
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        user_id = payload['user_id']
+    except:
+        return jsonify({'error': 'Invalid or missing token'}), 401
+
+    db = get_connection()
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM wishlist WHERE user_id = %s AND book_id = %s", (user_id, book_id))
+    db.commit()
+    return jsonify({'message': 'Book removed from wishlist'})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001)
