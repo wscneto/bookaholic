@@ -7,6 +7,13 @@
                 target="_blank"
                 class="footer-link text-primary"
                 >Walter Neto</a
+            >
+            and
+            <a
+                href="https://github.com/pxdroAndre"
+                target="_blank"
+                class="footer-link text-primary"
+                >Pedro André</a
             ></span
         >
     </div>
