@@ -53,6 +53,14 @@
                     to="/wishlist"
                     class="pi pi-heart-fill cursor-pointer bg-white border-1 border-primary text-primary p-4 rounded-full hover:bg-primary hover:text-white transition"
                 ></router-link>
+                <router-link
+                    to="/orders"
+                    class="pi pi-dollar cursor-pointer bg-white border-1 border-primary text-primary p-4 rounded-full hover:bg-primary hover:text-white transition"
+                ></router-link>
+                <router-link
+                    to="/recommendations"
+                    class="pi pi-thumbs-up-fill cursor-pointer bg-white border-1 border-primary text-primary p-4 rounded-full hover:bg-primary hover:text-white transition"
+                ></router-link>
                 <router-link to="/">
                     <button
                         @click="auth.logout()"
